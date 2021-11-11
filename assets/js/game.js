@@ -21,7 +21,7 @@ var fight = function(enemyName) {
     // repeat and execute as long as the enemy-robot is alive
     while(playerHealth > 0 && enemyHealth > 0) {  
     var promptFight = window.prompt("Would you like to FIGHT or SKIP this battle? Enter 'FIGHT' or 'SKIP' to choose.");
-
+        
     // if player picks "skip" confirm and then stop the loop
     if (promptFight === "skip" || promptFight === "SKIP") {
         // confirm player wants to skip
@@ -74,22 +74,56 @@ var fight = function(enemyName) {
 };
 // repeat and execute as long as the enemy-robot is alive
 }
-for (var i = 0; i < enemyNames.length; i++) {
-    if (playerHealth > 0) {
-        window.alert("Welcome to Robot Gladiators! Round" + ( i + 1) );
-    }
+var startGame = function() {
+    playerHealth = 100;
+    playerAttack = 10;
+    playerMoney = 10;
+    for (var i = 0; i < enemyNames.length; i++) {
+        
+        if (playerHealth > 0) {
+            window.alert("Welcome to Robot Gladiators! Round" + ( i + 1) );
+        
     
-        var pickedEnemyName = enemyNames[i];
-        enemyHealth = 50;
+            var pickedEnemyName = enemyNames[i];
+            enemyHealth = 50;
 
-    // use a debugger to pause script from running and check what's going on at that moment in the code
+        // use a debugger to pause script from running and check what's going on at that moment in the code
 
-    // call fight function with enemy-robot
-        fight(pickedEnemyName);
+        // call fight function with enemy-robot
+            fight(pickedEnemyName);
+        }
+        else {
+            window.alert("You have lost your robot in battle! Game Over!");
+            break;
+        }
     }
-   //else {
-    //window.alert("You have lost your robot in battle! Game Over!");
-    //break;
+    endGame();
+    debugger
+};
+// function to end the entire game
+var endGame = function() {
+    // if player s still alive, player wins!
+    if (playerHealth > 0) {
+        window.alert("Great job, you've survived the game! You now have a socre of " + playerMoney + ".");
+    }
+    else {
+        window.alert("The game has now ended. Let's see how you did!");
+    }
+    var playAgainConfirm = window.confirm("Would you like to play again?");
+
+    if (playAgainConfirm) {
+        // restart the game
+        startGame();
+    }
+    else {
+        window.alert("Thank you for playing Robot Gladiators! Come back soon!");
+    }
+endGame();
+};
+startGame();
+
+
+
 
 
 
