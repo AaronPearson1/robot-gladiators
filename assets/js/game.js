@@ -11,27 +11,34 @@ var randomNumber = function(min, max) {
     return value;
 };
 
+var fightOrSkip = function() {
+    var promptFight = window.prompt('Would you like to FIGHT or SKIP this battle? Enter "FIGHT" or "SKIP" to choose.');
+
+    if (!promptFight) {
+        window.alert("You need to proivde a valid answer! Please try again.");
+        return fightOrSkip;
+    }
+
+    promptFight = promptFight.toLowerCase();
+
+    if (promptFight === "skip") {
+        var confirmSkip = window.confirm("Are you sure you'd like to quit?");
+
+        if (confirmSkip) {
+            window.alert(playerInfo.name + " has decided to skip this fight. Goodbye!");
+            playerInfo.money = Math.max(0,playerInfo.money - 10);
+
+            return true;
+        }
+    }
+}
+
 var fight = function(enemy) {
     // repeat and execute as long as the enemy-robot is alive
     while(playerInfo.health > 0 && enemy.health > 0) {  
-    var promptFight = window.prompt("Would you like to FIGHT or SKIP this battle? Enter 'FIGHT' or 'SKIP' to choose.");
-
-    //window.alert("You did not pick a valid option. Try again.");
-        
-    // if player picks "skip" confirm and then stop the loop
-    if (promptFight === "skip" || promptFight === "SKIP") {
-        // confirm player wants to skip
-        var confirmSKip = window.confirm("Are you sure you'd like to quit?");
-
-        // if yes (true), leave fight
-        if (confirmSKip) {
-            window.alert(playerInfo.name + " has decided to skip this fight. Goodbye!");
-            // subtract money from playerInfo.money for skipping
-            playerInfo.money = Math.max(0, playerInfo.money - 10);
-            console.log("playerInfo.money", playerInfo.money);
+        if (fightOrSkip()) {
             break;
         }
-    }
 
     // generate random damage value based on player's attack power
     var damage = randomNumber(playerInfo.attack - 3,playerInfo.attack);
@@ -152,8 +159,7 @@ var shop = function() {
 
                 // call shop() again to force player to pick a valid option
                 shop();
-                break;
-
+                break;  
     }
 };
 
@@ -166,6 +172,7 @@ var getPlayerName =  function() {
     }
 
     console.log("Your robot's name is " + name);
+    return name;
 };
 
 var playerInfo = {
