@@ -86,10 +86,10 @@ var fight = function(enemy) {
                 break;
             }   else {
                 window.alert(playerInfo.name + " still has " + playerInfo.health + " health left.");
-                }  
-        // switch turn of order next round
-isPlayerTurn = !isPlayerTurn;
+                } 
             }
+        // switch turn of order next round
+        isPlayerTurn = !isPlayerTurn;
     }
 };
 // repeat and execute as long as the enemy-robot is alive
