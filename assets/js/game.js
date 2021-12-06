@@ -206,7 +206,7 @@ var getPlayerName =  function() {
 
 var playerInfo = {
     name: getPlayerName(),
-    name: window.prompt("what is your robot's name?"),
+//    name: window.prompt("what is your robot's name?"),
     health: 100,
     attack: 10,
     money: 10,
